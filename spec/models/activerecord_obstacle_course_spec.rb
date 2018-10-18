@@ -227,12 +227,13 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = [item_1, item_2, item_7, item_8, item_9, item_10]
 
     # ----------------------- Using Ruby -------------------------
-    items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
+    # items = Item.all.map { |item| item unless items_not_included.include?(item) }.compact
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-    # ------------------------------------------------------------
+    items = Item.find(:all, :conditions => !items_not_included)
+    # User.find(:all, :conditions => ["id != ?", current_user.id]))    # ------------------------------------------------------------
 
     # Expectation
     expect(items).to eq(expected_result)
