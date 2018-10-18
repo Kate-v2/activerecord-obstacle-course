@@ -232,6 +232,9 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+
+    skip
+
     items = Item.find(:all, :conditions => !items_not_included)
     # User.find(:all, :conditions => ["id != ?", current_user.id]))    # ------------------------------------------------------------
 
@@ -243,12 +246,13 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = [item_2, item_3, item_4, item_5]
 
     # ----------------------- Using Ruby -------------------------
-    order = Order.find(3)
-    grouped_items = order.items.sort_by { |item| item.name }
+    # order = Order.find(3)
+    # grouped_items = order.items.sort_by { |item| item.name }
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+    grouped_items = Order.find(3).items.order(:name)
     # ------------------------------------------------------------
 
     # Expectation
