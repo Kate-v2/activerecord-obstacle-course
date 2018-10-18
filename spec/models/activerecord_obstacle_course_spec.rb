@@ -156,11 +156,12 @@ describe 'ActiveRecord Obstacle Course' do
     expected_result = [order_1, order_2, order_3, order_4]
 
     # ----------------------- Using Ruby -------------------------
-    orders_less_than_550 = Order.all.select { |order| order.amount < 550 }
+    # orders_less_than_550 = Order.all.select { |order| order.amount < 550 }
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+    orders_less_than_550 = Order.where( "amount < ?", 550)
     # ------------------------------------------------------------
 
     # Expectation
