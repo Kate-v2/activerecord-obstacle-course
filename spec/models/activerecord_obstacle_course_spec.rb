@@ -293,17 +293,20 @@ describe 'ActiveRecord Obstacle Course' do
                        'Thing 1', 'Thing 4', 'Thing 5', 'Thing 7']
 
     # ----------------------- Using Ruby -------------------------
-    names = Order.all.map do |order|
-      if order.items
-        order.items.map { |item| item.name }
-      end
-    end
-
-    names = names.flatten
+    # names = Order.all.map do |order|
+    #   if order.items
+    #     order.items.map { |item| item.name }
+    #   end
+    # end
+    #
+    # names = names.flatten
     # ------------------------------------------------------------
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
+    # names = Order.all.items.pluck(:name)
+    ids = OrderItem.pluck(:item_id)
+    names = Item.where(id: ids).pluck(:name)
     # ------------------------------------------------------------
 
     # Expectation
