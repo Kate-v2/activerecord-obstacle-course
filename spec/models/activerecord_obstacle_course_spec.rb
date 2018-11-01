@@ -301,11 +301,11 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-    skip
-    # names = Order.all.items.pluck(:name)
-
-    ids = OrderItem.pluck(:item_id)
-    names = Item.where(id: ids).pluck(:name)
+    # names = OrderItem.joins(:items).pluck(:name)
+    names = Item.joins(:order_items).pluck(:name)
+    #
+    # ids = OrderItem.pluck(:item_id)
+    # names = Item.where(id: ids).pluck(:name)
     # ------------------------------------------------------------
 
     # Expectation
