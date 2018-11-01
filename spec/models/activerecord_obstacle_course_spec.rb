@@ -232,11 +232,8 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-
-    skip
-
-    items = Item.find(:all, :conditions => !items_not_included)
-    # User.find(:all, :conditions => ["id != ?", current_user.id]))    # ------------------------------------------------------------
+    items = Item.where.not(id: items_not_included.pluck(:id) )
+    # ------------------------------------------------------------
 
     # Expectation
     expect(items).to eq(expected_result)
