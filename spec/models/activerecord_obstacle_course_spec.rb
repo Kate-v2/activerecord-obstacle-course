@@ -301,11 +301,7 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-    # names = OrderItem.joins(:items).pluck(:name)
     names = Item.joins(:order_items).pluck(:name)
-    #
-    # ids = OrderItem.pluck(:item_id)
-    # names = Item.where(id: ids).pluck(:name)
     # ------------------------------------------------------------
 
     # Expectation
@@ -335,9 +331,11 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
-    order_ids = OrderItem.where(item_id: item_8.id).pluck(:order_id)
-    user_ids = Order.where(id: order_ids).pluck(:user_id)
-    users = User.where(id: user_ids).order(:name).pluck(:name)
+    id = item_8.id
+    ids   = Order.joins(:order_items).where('item_id = ?', id).pluck(:user_id)
+    users = User.where(id: ids).order(:name).pluck(:name)
+
+
     # ------------------------------------------------------------
 
     # Expectation
