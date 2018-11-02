@@ -567,8 +567,12 @@ describe 'ActiveRecord Obstacle Course' do
     # Sal        |         5
 
     # ------------------ ActiveRecord Solution ----------------------
-    # custom_results =
-    skip
+    custom_results = User.select(' users.name, COUNT(orders.id) AS total_order_count ')
+                         .joins(:orders)
+                         .group(:user_id, :id)
+                         .order(:name)
+
+
     # ---------------------------------------------------------------
 
     expect(custom_results[0].name).to eq(user_3.name)
@@ -655,6 +659,7 @@ describe 'ActiveRecord Obstacle Course' do
   end
 
   it '30. returns the names of items that have been ordered without n+1 queries' do
+    skip
     # What is an n+1 query?
     # This video is older, but the concepts explained are still relevant:
     # http://railscasts.com/episodes/372-bullet
