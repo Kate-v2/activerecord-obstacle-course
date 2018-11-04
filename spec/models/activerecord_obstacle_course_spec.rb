@@ -660,8 +660,8 @@ describe 'ActiveRecord Obstacle Course' do
     # ---------------------------------------------------------------
 
 
-    expect(data[0].user_name).to eq(user_2.name)
-    expect(data[0].order_id).to eq(2)
+    expect(data[0].user_name).to  eq(user_2.name)
+    expect(data[0].order_id).to   eq(2)
     expect(data[0].item_count).to eq(4)
     expect(data[5].user_name).to eq(user_1.name)
     expect(data[5].order_id).to eq(1)
