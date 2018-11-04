@@ -645,8 +645,18 @@ describe 'ActiveRecord Obstacle Course' do
     # how will you turn this into the proper ActiveRecord commands?
 
     # ------------------ ActiveRecord Solution ----------------------
-    # data = []
+
     skip
+
+    data = User.select('users.name AS user_name, orders.id AS order_id, COUNT(order_items.id) AS item_count')
+               .joins(:orders, :order_items)
+               .group('orders.id = order_items.order_id')
+               .order(name: :desc)
+
+
+               # binding.pry
+               # .group('order_items.order_id = orders.id')
+               # .where('orders.id = order_items.order_id')
     # ---------------------------------------------------------------
 
 
@@ -662,18 +672,18 @@ describe 'ActiveRecord Obstacle Course' do
   end
 
   it '30. returns the names of items that have been ordered without n+1 queries' do
-    skip
+    # skip
     # What is an n+1 query?
     # This video is older, but the concepts explained are still relevant:
     # http://railscasts.com/episodes/372-bullet
 
     # Don't worry about the lines containing Bullet. This is how we are detecting n+1 queries.
     Bullet.enable = true
-    Bullet.raise = true
+    Bullet.raise  = true
     Bullet.start_request
 
     # ------------------------------------------------------
-    skip
+    # skip
     orders = Order.all # Edit only this line
     # ------------------------------------------------------
 
