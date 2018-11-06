@@ -668,7 +668,6 @@ describe 'ActiveRecord Obstacle Course' do
   end
 
   it '30. returns the names of items that have been ordered without n+1 queries' do
-    # skip
     # What is an n+1 query?
     # This video is older, but the concepts explained are still relevant:
     # http://railscasts.com/episodes/372-bullet
@@ -679,8 +678,7 @@ describe 'ActiveRecord Obstacle Course' do
     Bullet.start_request
 
     # ------------------------------------------------------
-    skip
-    orders = Order.all # Edit only this line
+    orders = Order.includes(:items)
     # ------------------------------------------------------
 
     # Do not edit below this line
