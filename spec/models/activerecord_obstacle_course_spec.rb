@@ -646,17 +646,13 @@ describe 'ActiveRecord Obstacle Course' do
 
     # ------------------ ActiveRecord Solution ----------------------
 
-    skip
+    data = User.select('users.name AS user_name,
+                        orders.id AS order_id,
+                        COUNT(order_items.id) AS item_count')
+                .joins(:order_items)
+                .group('users.name, orders.id')
+                .order('user_name DESC')
 
-    data = User.select('users.name AS user_name, orders.id AS order_id, COUNT(order_items.id) AS item_count')
-               .joins(:orders, :order_items)
-               .group('orders.id = order_items.order_id')
-               .order(name: :desc)
-
-
-               # binding.pry
-               # .group('order_items.order_id = orders.id')
-               # .where('orders.id = order_items.order_id')
     # ---------------------------------------------------------------
 
 
@@ -683,7 +679,7 @@ describe 'ActiveRecord Obstacle Course' do
     Bullet.start_request
 
     # ------------------------------------------------------
-    # skip
+    skip
     orders = Order.all # Edit only this line
     # ------------------------------------------------------
 
