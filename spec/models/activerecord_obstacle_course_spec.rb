@@ -332,8 +332,7 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
     id = item_8.id
-    ids   = Order.joins(:order_items).where('item_id = ?', id).pluck(:user_id)
-    users = User.where(id: ids).order(:name).pluck(:name)
+    users = User.joins(:orders, :order_items).where('order_items.item_id = ?', id).order(:name).distinct.pluck(:name)
 
 
     # ------------------------------------------------------------
@@ -381,6 +380,7 @@ describe 'ActiveRecord Obstacle Course' do
     # Solution goes here
     order  = Order.where(user_id: 3)[2]
     names  = OrderItem.joins(:item).where(order_id: order.id).pluck(:name)
+
     items_for_user_3_third_order = names
     # ------------------------------------------------------------
 
@@ -543,9 +543,6 @@ describe 'ActiveRecord Obstacle Course' do
     # Solution goes here
     # When you find a solution, experiment with adjusting your method chaining
     # Which ones are you able to switch around without relying on Ruby's Enumerable methods?
-
-    # oitems = OrderItem.order(:item_id).pluck(:item_id)
-    # items  = Item.where(id: oitems).distinct.pluck(:name)
 
     items = Item.joins(:order_items).order(:id).distinct.pluck(:name)
 
